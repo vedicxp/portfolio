@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vedic Mahanandani — Frontend Developer</title>
+  <meta name="description" content="Portfolio of Vedic Mahanandani, a frontend developer building clean, responsive websites with HTML and CSS.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Public+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ NAVBAR (sticky + CSS-only hamburger) ============ -->
+  <header class="site-header">
+    <nav class="navbar" aria-label="Main">
+      <a class="logo" href="#hero" aria-label="Home">VM</a>
+
+      <!-- Hidden checkbox powers the mobile menu without JavaScript -->
+      <input type="checkbox" id="menu-toggle" class="menu-toggle">
+      <label for="menu-toggle" class="menu-button" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </label>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#journey">Journey</a></li>
+        <li><a href="#contact" class="btn btn-small">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="hero">
+      <div class="hero-text">
+        <p class="hero-hello">Hi, I'm Vedic Mahanandani 👋</p>
+        <h1>I build web pages from a blank file.</h1>
+        <p class="hero-lead">
+          Frontend developer in training. I turn sketches into clean,
+          responsive pages using HTML and CSS.
+        </p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn">View my work</a>
+          <a href="https://github.com/your-username" class="btn btn-outline" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+
+      <!-- The one animated moment: a page "building itself" -->
+      <div class="hero-visual" aria-hidden="true">
+        <div class="blueprint">
+          <div class="bp-bar"><i></i><i></i><i></i></div>
+          <div class="bp-nav b1"></div>
+          <div class="bp-title b2"></div>
+          <div class="bp-line b3"></div>
+          <div class="bp-line short b4"></div>
+          <div class="bp-grid">
+            <div class="b5"></div><div class="b6"></div><div class="b7"></div>
+          </div>
+          <span class="dim dim-w">1200px</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="section">
+      <h2>About me</h2>
+      <div class="about-grid">
+        <!-- Put your photo at images/vedic.jpg (square or portrait works best) -->
+        <figure class="portrait">
+          <img src="images/vedic.jpg" alt="Portrait of Vedic Mahanandani" width="320" height="400">
+        </figure>
+        <div class="about-text">
+          <p class="about-main">
+            I'm Vedic Mahanandani, a Computer Science student learning web
+            development by building things. I like turning a rough idea into
+            something people can click, scroll and use.
+          </p>
+          <p>
+            I'm currently focused on layout: Flexbox, Grid and responsive design.
+            Next up is JavaScript, so my pages can do more than look good.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS (bento grid) ============ -->
+    <section id="skills" class="section">
+      <h2>Skills</h2>
+      <div class="bento">
+        <article class="tile tile-wide">
+          <h3>HTML + CSS</h3>
+          <p>Semantic markup, the box model, Flexbox, Grid, positioning, transitions and keyframe animations.</p>
+          <ul class="pills">
+            <li>Semantic HTML</li><li>Flexbox</li><li>CSS Grid</li><li>Animations</li>
+          </ul>
+        </article>
+        <article class="tile">
+          <h3>Responsive design</h3>
+          <p>Mobile-first layouts with media queries.</p>
+        </article>
+        <article class="tile">
+          <h3>Tools</h3>
+          <ul class="pills">
+            <li>Git</li><li>GitHub</li><li>VS Code</li><li>DevTools</li>
+          </ul>
+        </article>
+        <article class="tile tile-learning">
+          <h3>Currently learning</h3>
+          <ul class="pills">
+            <li>JavaScript</li><li>React</li><li>Node.js</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="section">
+      <h2>Projects</h2>
+      <div class="projects">
+
+        <!-- TODO: replace titles, descriptions and links with your real projects -->
+        <article class="card">
+          <div class="thumb thumb-flex" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="card-body">
+            <h3>Flexbox Game</h3>
+            <p>A small game interface laid out entirely with Flexbox. I practised alignment, spacing and the box model.</p>
+            <ul class="pills"><li>HTML</li><li>CSS</li><li>Flexbox</li></ul>
+            <div class="card-links">
+              <a href="https://github.com/your-username/flexbox-game" target="_blank" rel="noopener">Live demo</a>
+              <a href="https://github.com/your-username/flexbox-game" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb thumb-grid" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <div class="card-body">
+            <h3>Responsive Website</h3>
+            <p>A multi-section landing page that rearranges itself from phone to desktop using Grid and media queries.</p>
+            <ul class="pills"><li>HTML</li><li>CSS</li><li>Grid</li><li>Media queries</li></ul>
+            <div class="card-links">
+              <a href="https://github.com/your-username/responsive-website" target="_blank" rel="noopener">Live demo</a>
+              <a href="https://github.com/your-username/responsive-website" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="thumb thumb-motion" aria-hidden="true">
+            <span></span>
+          </div>
+          <div class="card-body">
+            <h3>CSS Animation Lab</h3>
+            <p>A set of components that move using transitions, transforms and keyframes, with no JavaScript.</p>
+            <ul class="pills"><li>HTML</li><li>CSS</li><li>Keyframes</li></ul>
+            <div class="card-links">
+              <a href="https://github.com/your-username/css-animation-lab" target="_blank" rel="noopener">Live demo</a>
+              <a href="https://github.com/your-username/css-animation-lab" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============ EDUCATION / JOURNEY ============ -->
+    <section id="journey" class="section">
+      <h2>Education &amp; journey</h2>
+      <ol class="timeline">
+        <!-- TODO: edit with your real details -->
+        <li>
+          <h3>B.Tech, Computer Science</h3>
+          <p>Your University</p>
+          <span class="when">2025 – Present</span>
+        </li>
+        <li>
+          <h3>Web Development course</h3>
+          <p>Learning HTML and CSS by building projects, ending with this portfolio.</p>
+          <span class="when">2026</span>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section contact">
+      <div>
+        <h2>Let's build something together</h2>
+        <p>Have an idea, an internship or just a question? Send a message.</p>
+        <ul class="contact-links">
+          <li><a href="mailto:mahanandanivedic@gmail.com">mahanandanivedic@gmail.com</a></li>
+          <li><a href="https://github.com/vedicxp" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/vedicxp" target="_blank" rel="noopener">LinkedIn</a></li>
+        </ul>
+      </div>
+
+      <!-- Frontend-only form. mailto: opens the visitor's email app, no backend needed. -->
+      <form class="form" action="mailto:mahanandanivedic@gmail.com" method="post" enctype="text/plain">
+        <label>Name
+          <input type="text" name="name" required autocomplete="name">
+        </label>
+        <label>Email
+          <input type="email" name="email" required autocomplete="email">
+        </label>
+        <label>Message
+          <textarea name="message" rows="4" required></textarea>
+        </label>
+        <button type="submit" class="btn">Send message</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <p>© 2026 Vedic Mahanandani. Built with HTML &amp; CSS.</p>
+    <ul>
+      <li><a href="https://github.com/vedicxp" target="_blank" rel="noopener">GitHub</a></li>
+      <li><a href="https://www.linkedin.com/in/your-username" target="_blank" rel="noopener">LinkedIn</a></li>
+      <li><a href="mailto:mahanandanivedic@gmail.com">Email</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
