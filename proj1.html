@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pixel Dash — CSS Only Game</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;600;700;800&display=swap');
+
+:root {
+    --ink: #191715;
+    --paper: #f7f5f1;
+    --orange: #ff512f;
+    --green: #c8f169;
+    --muted: #827a72;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Manrope', Arial, sans-serif
+}
+
+* { box-sizing: border-box }
+
+body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans)
+}
+
+.shell {
+    width: min(960px, calc(100% - 36px));
+    margin: auto
+}
+
+header {
+    height: 74px;
+    border-bottom: 1px solid #ded9d1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.logo {
+    font-weight: 800;
+    letter-spacing: -.06em;
+    text-decoration: none;
+    color: var(--ink);
+    font-size: 14px
+}
+
+.logo span {
+    color: var(--orange)
+}
+
+.label,
+.eyebrow,
+.hud,
+.button,
+footer {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: .08em
+}
+
+.label {
+    color: var(--muted)
+}
+
+.intro {
+    padding: 50px 0 32px
+}
+
+.eyebrow {
+    color: #756d65
+}
+
+.eyebrow:first-letter {
+    color: #5d9b43
+}
+
+h1 {
+    font-size: clamp(56px, 9vw, 92px);
+    line-height: .9;
+    letter-spacing: -.09em;
+    margin: 18px 0 12px
+}
+
+h1 span {
+    color: var(--orange)
+}
+
+.sub {
+    font-size: 13px;
+    color: var(--muted)
+}
+
+.game {
+    overflow: hidden;
+    border: 1px solid #e4dfd7;
+    border-radius: 16px;
+    background: white;
+    box-shadow: 0 20px 55px #31231a0c
+}
+
+.hud {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px 20px;
+    color: #80786f
+}
+
+.hud b {
+    color: var(--orange);
+    font-size: 13px
+}
+
+#jump {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px
+}
+
+.world {
+    height: clamp(250px, 43vw, 390px);
+    position: relative;
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    background: linear-gradient(#ff633d, #ff9b69 61%, #ffd0a0)
+}
+
+.sun {
+    position: absolute;
+    top: 12%;
+    right: 14%;
+    width: clamp(55px, 10vw, 90px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #ffe9a7;
+    box-shadow: 0 0 50px #fff0b65c
+}
+
+.cloud {
+    position: absolute;
+    width: 80px;
+    height: 17px;
+    border-radius: 30px;
+    background: #fff5df9c;
+    animation: cloud 12s linear infinite
+}
+
+.cloud:before,
+.cloud:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    border-radius: 50%;
+    background: inherit
+}
+
+.cloud:before {
+    left: 15px;
+    width: 28px;
+    height: 28px
+}
+
+.cloud:after {
+    left: 39px;
+    width: 20px;
+    height: 20px
+}
+
+.cloud1 {
+    top: 25%;
+    left: 16%
+}
+
+.cloud2 {
+    top: 42%;
+    left: 63%;
+    transform: scale(.7);
+    animation-delay: -5s
+}
+
+.mountain {
+    position: absolute;
+    bottom: 22%;
+    width: 0;
+    height: 0;
+    border-left: 180px solid transparent;
+    border-right: 180px solid transparent;
+    border-bottom: 155px solid #d94336;
+    opacity: .4
+}
+
+.m1 {
+    left: 13%;
+    transform: scale(1.3);
+    border-bottom-color: #f06b4b
+}
+
+.m2 {
+    left: 48%;
+    transform: scale(1.05)
+}
+
+.ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 22%;
+    background: #292a35;
+    border-top: 5px solid #45424b
+}
+
+.stripes {
+    position: absolute;
+    bottom: 15%;
+    width: 200%;
+    height: 4px;
+    background: repeating-linear-gradient(90deg, #ffc87d 0 42px, transparent 42px 80px);
+    animation: track .75s linear infinite
+}
+
+.runner {
+    position: absolute;
+    z-index: 4;
+    left: 12%;
+    bottom: 18%;
+    width: 36px;
+    height: 66px;
+    animation: bob .28s ease-in-out infinite alternate
+}
+
+.head {
+    position: absolute;
+    top: 0;
+    left: 8px;
+    width: 25px;
+    height: 25px;
+    border: 4px solid #1b202b;
+    border-radius: 8px 10px 7px 7px;
+    background: var(--green)
+}
+
+.head:after {
+    content: "";
+    position: absolute;
+    right: 2px;
+    top: 5px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #1b202b
+}
+
+.body {
+    position: absolute;
+    top: 24px;
+    left: 10px;
+    width: 20px;
+    height: 25px;
+    background: #1b202b;
+    border-radius: 5px;
+    transform: skew(-8deg)
+}
+
+.leg {
+    position: absolute;
+    top: 45px;
+    width: 7px;
+    height: 20px;
+    border-radius: 5px;
+    background: var(--green);
+    transform-origin: top
+}
+
+.leg1 {
+    left: 12px;
+    animation: legs .25s infinite alternate
+}
+
+.leg2 {
+    left: 23px;
+    animation: legs .25s infinite alternate-reverse
+}
+
+.obstacle {
+    position: absolute;
+    z-index: 3;
+    bottom: 18%;
+    width: 28px;
+    height: 40px;
+    background: var(--green);
+    border: 3px solid #1b202b;
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    animation: obstacle 2.7s linear infinite
+}
+
+.o1 {
+    left: 100%
+}
+
+.o2 {
+    left: 100%;
+    animation-delay: -1s;
+    transform: scale(.75)
+}
+
+.o3 {
+    left: 100%;
+    animation-delay: -2s;
+    transform: scale(1.15)
+}
+
+.coin {
+    position: absolute;
+    color: #fff0a8;
+    font-size: 24px;
+    animation: obstacle 3.5s linear infinite
+}
+
+.c1 {
+    left: 100%;
+    top: 45%;
+    animation-delay: -.5s
+}
+
+.c2 {
+    left: 100%;
+    top: 62%;
+    animation-delay: -2.2s
+}
+
+.hint {
+    position: absolute;
+    right: 18px;
+    bottom: 17px;
+    padding: 9px 12px;
+    border: 1px solid #ffffff7a;
+    border-radius: 99px;
+    color: white;
+    font: 8px var(--mono);
+    letter-spacing: .08em;
+    background: #1b202b22
+}
+
+#jump:checked + .world .runner {
+    animation: jump .7s cubic-bezier(.3, .1, .6, 1)
+}
+
+#jump:checked + .world .o1,
+#jump:checked + .world .o2,
+#jump:checked + .world .o3 {
+    animation-duration: 1.8s
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px
+}
+
+.controls p {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1;
+    margin: 0
+}
+
+.controls p b {
+    font: 9px var(--mono)
+}
+
+.controls p span {
+    font-size: 11px;
+    color: var(--muted)
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 13px 16px;
+    border: 1px solid #dcd6cd;
+    border-radius: 99px;
+    cursor: pointer;
+    color: var(--ink);
+    background: white;
+    text-decoration: none;
+    transition: .2s
+}
+
+.button:hover {
+    background: var(--ink);
+    color: white;
+    transform: translateY(-2px)
+}
+
+.button strong {
+    color: var(--orange);
+    font-size: 14px
+}
+
+.note {
+    display: flex;
+    gap: 17px;
+    padding: 35px 0 45px
+}
+
+.star {
+    display: grid;
+    place-items: center;
+    flex: 0 0 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--green);
+    font-size: 20px
+}
+
+.note h2 {
+    font-size: 15px;
+    letter-spacing: -.04em;
+    margin: 0 0 7px
+}
+
+.note p {
+    max-width: 580px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.8
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0 25px;
+    border-top: 1px solid #ded9d1;
+    color: #898178;
+    font-size: 8px
+}
+
+@keyframes track {
+    to {
+        transform: translateX(-80px)
+    }
+}
+
+@keyframes obstacle {
+    from {
+        left: 105%
+    }
+
+    to {
+        left: -10%
+    }
+}
+
+@keyframes bob {
+    to {
+        transform: translateY(-3px)
+    }
+}
+
+@keyframes legs {
+    to {
+        transform: rotate(35deg)
+    }
+}
+
+@keyframes cloud {
+    to {
+        translate: -180px
+    }
+}
+
+@keyframes jump {
+    0% {
+        transform: translateY(0)
+    }
+
+    38% {
+        transform: translateY(-125px) rotate(-8deg)
+    }
+
+    70% {
+        transform: translateY(-105px) rotate(4deg)
+    }
+
+    100% {
+        transform: translateY(0)
+    }
+}
+
+@media(max-width:600px) {
+    .intro {
+        padding-top: 42px
+    }
+
+    .hud {
+        padding: 14px;
+        font-size: 8px
+    }
+
+    .controls {
+        flex-wrap: wrap;
+        padding: 15px
+    }
+
+    .controls p {
+        flex-basis: 100%;
+        padding-bottom: 5px
+    }
+
+    .button {
+        flex: 1
+    }
+
+    .runner {
+        left: 9%;
+        transform-origin: bottom left
+    }
+
+    .mountain {
+        border-left-width: 120px;
+        border-right-width: 120px;
+        border-bottom-width: 115px
+    }
+
+    footer {
+        font-size: 7px
+    }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+    *,
+    *:before,
+    *:after {
+        animation-duration: 2s !important;
+        scroll-behavior: auto !important
+    }
+}
+</style>
+</head>
+<body>
+<main class="shell">
+  <header><a class="logo" href="#">PIXEL<span>DASH</span></a><span class="label">ARCADE / 001</span></header>
+  <section class="intro">
+    <p class="eyebrow">● CSS-ONLY MINI GAME</p>
+    <h1>Ready, set,<br><span>run.</span></h1>
+    <p class="sub">Jump over the blocks. How long can you survive?</p>
+  </section>
+  <section class="game">
+    <div class="hud"><span>● PLAYER 01</span><span>SURVIVAL MODE <b>∞</b></span></div>
+    <input id="jump" type="checkbox">
+    <label class="world" for="jump" title="Click or tap to jump">
+      <div class="sun"></div><div class="cloud cloud1"></div><div class="cloud cloud2"></div>
+      <div class="mountain m1"></div><div class="mountain m2"></div>
+      <div class="ground"><div class="stripes"></div></div>
+      <div class="runner"><i class="head"></i><i class="body"></i><i class="leg leg1"></i><i class="leg leg2"></i></div>
+      <div class="obstacle o1"></div><div class="obstacle o2"></div><div class="obstacle o3"></div>
+      <div class="coin c1">✦</div><div class="coin c2">✦</div>
+      <span class="hint">TAP / CLICK TO JUMP</span>
+    </label>
+    <div class="controls">
+      <p><b>HOW TO PLAY</b><span>Click or tap the game area to jump.</span></p>
+      <label class="button" for="jump">JUMP <strong>↑</strong></label>
+      <a class="button restart" href="index.html">RESTART <strong>↻</strong></a>
+    </div>
+  </section>
+  <section class="note"><div class="star">✳</div><div><h2>One button. Endless tries.</h2><p>This mini-game uses only HTML and CSS. The runner and obstacles animate automatically, and clicking the play area triggers a CSS jump. A true score or collision detection would require JavaScript.</p></div></section>
+  <footer><span>BUILT WITH HTML + CSS</span><span>KEEP MOVING ↗</span></footer>
+</main>
+</body>
+</html>
